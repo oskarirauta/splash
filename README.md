@@ -1,10 +1,7 @@
-# Clue Splash
+# Splash
 
-**Splash** is a graphical term for representation of boot process, developed especially for _Clue OS_
-('the father' of this project) but might be applicable to any Linux system. **Splash** application is
-currently use to control the boot process of the _Clue OS_ (_Debian Jessie_ fork) and to implement
-a graphical view of different utilities from **Setup** project (part of **Clue** main project as main
-utility for system configuration).
+**Splash** is a graphical term for representation of boot process, fork of original **Splash** or
+**Clue Splash** which was developed especially for _Clue OS_.
 **Splash** can display graphics (JPG image format and others) or some combinations of graphics with
 text messages (in graphical format). Splash program uses a stateful memory buffer and is able to
 initiate and maintain the workflow even is the process is not running in loop.
@@ -20,16 +17,27 @@ Splash program is designed to support the following feature:
 3. `--shape`   = draws graphical shapes and basic controls for data display, loading, etc.
 4. `--exit`    = exit from the splash application. It accepts also a delay as an optional parameter
 
+___Examples___
+
+`splash --exit`
+
+or
+
+`splash --exit=5` for 5 second delay
+
 For the syntax details of each option please see **Running** chapter.
 
 > **Note**: One one option could be specified for a workflow step (program execution)
 
 # Prerequisites
-In order to build `clue-splash` package from source code you have to install required packages mentioned
+In order to build **splash** from source code you have to install required packages mentioned
 below. **Splash** is a static-compiled application, so it is not need to install additional libraries or
 package to run it or to bundle it in your ___RamFS___ image.
 
-`apt-get install -y gcc uthash-dev libjpeg62-dev libfreetype6-dev libpng12-dev`
+ - libjpeg
+ - libfreetype
+ - libpng
+ - libz
 
 # Running
 As a general structure, each drawing command has the following components:
@@ -47,8 +55,8 @@ options are explained in ___Display Options___ chapter.
 ## Messages
 To display **text messages** on the screen you have to prepare a command with the following options:
 * `fontfile` - refers a TTF file which should be the font name to display the required text message.
-				In case the font file is already deployed in `share` location of **Splash** module
-				(`/opt/clue/share/splash/fonts`) you can refer only the file name (not thw whole path).
+				In case the font file is already deployed in `share` location of **Splash** data
+				(`/usr/share/splash/fonts`) you can refer only the file name (not the whole path).
 				By default three font files are includes: `bold.ttf`, `regular.ttf` and `teletext.ttf`
 * `fontsize` - indicates the height of the text letters
 * `fontcolor` - sets the font color for the specified message. The application accept only HEX color
@@ -72,7 +80,7 @@ __or__
 
 ## Images
 To display **images** on the screen you have to build a command with the options described below. The `--image`
-switch can refer a file name already deployed on the application resources location (`/opt/clue/share/splash/images`)
+switch can refer a file name already deployed on the application resources location (`/usr/share/splash/images`)
 or a specific file location. In case the file extension is not specified the PNG format is considered by default.
 * `rotate` - rotate specified image with 90, 180 or 270 degrees - corresponding to input values: 1, 2, 3
 * `enlarge` - displays the image to the whole area of the screen. It is a boolean value, accepts values, likes,
@@ -88,11 +96,11 @@ ___Examples___
 
 __or__
 
-`splash --image=/opt/clue/share/splash/images/splash.jpg" -x100 -y100`
+`splash --image=/usr/share/splash/images/splash.jpg" -x100 -y100`
 
 __or__
 
-`splash -i /opt/clue/share/splash/images/splash.jpg" --xpoint=100 -ypoint= --properties="rotate=1"`
+`splash -i /usr/share/splash/images/splash.jpg" --xpoint=100 -ypoint= --properties="rotate=1"`
 
 
 ## Shapes
