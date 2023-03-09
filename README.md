@@ -1,7 +1,10 @@
 # Splash
 
 **Splash** is a graphical term for representation of boot process, fork of original **Splash** or
-**Clue Splash** which was developed especially for _Clue OS_.
+**Clue Splash** which was developed especially for _Clue OS_. This fork is more or less modified
+for Openwrt, as it's great - but could have even a option for some eye candy, for those who don't
+run it **headless**.
+
 **Splash** can display graphics (JPG image format and others) or some combinations of graphics with
 text messages (in graphical format). Splash program uses a stateful memory buffer and is able to
 initiate and maintain the workflow even is the process is not running in loop.
