@@ -230,13 +230,15 @@ void usageCoords(char *fn) {
 void usageSystem(char *fn) {
 
 	printf("\n* System *\r\n");
-	printf("\nWhen it's time to end splash display, you can use following options:\r\n");
-	printf(" - exit exits splash\r\n");
-	printf(" - delay sets delay before exiting\r\n");
+	printf("\nWhen it's time to end splash display, you can use option exit\r\n");
+	printf("If needed, you can add a pause of selected amount of seconds before\r\n");
+	printf("exiting.\r\n");
 
 	printf("\nExamples:\r\n");
 	printf("  %s --exit\r\n", fn);
-	printf("  %s --exit --delay=10\r\n", fn);
+	printf("  %s --exit=5\r\n", fn);
+
+	printf("\nLast example delays exiting with 5 seconds.\r\n");
 }
 
 void usageAll(char *fn) {
