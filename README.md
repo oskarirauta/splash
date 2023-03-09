@@ -39,6 +39,27 @@ package to run it or to bundle it in your ___RamFS___ image.
  - libpng
  - libz
 
+# Building
+**Splash** does not have configure script. You just call
+`make`
+but as it unlikely will build with just that, you should make it suitable for your operating system and
+adjust with your system's specific options. Necessary environment variables are supported, such being
+ - CC, default: `gcc`
+ - CFLAGS, default: `-O2 -I. -I./include -I/usr/include -I/usr/include/freetype2 -I/usr/include/freetype2/freetype -Wno-int-conversion -Wno-incompatible-pointer-types -Wno-pointer-to-int-cast -Wno-write-strings`
+ -  LDFLAGS, default: `-O2 -w`
+ -  LIBS, default: `libfreetype.a libjpeg.a libpng.a libz.a`
+
+Libraries should found from your library search path, or you will need to change filenames to have full path.
+Since I didn't _re-create_ **splash**, code is very old and for that reason there is so many warning suppressors in *CFLAGS*.
+You can also customize it during build; available customizations are distribution, logfile path (/var/log/splash.log), and
+datadir (/usr/share/splash) - these are customized via defines given as CFLAGS, for example you could add following to your CFLAGS.
+`-DDISTRIBUTION=openwrt -DLOGFILEPATH=/tmp/splash.log -DDATADIR=/root/splash`
+
+# Installing
+**Splash** Makefile does not come with support for installing, you need to do it by your self. Copy built **splash** binary to
+somewhere in your path, such as /usr/bin and copy contents of **res** directory to location of **splash data dir** which as
+default, is /usr/share/splash.
+
 # Running
 As a general structure, each drawing command has the following components:
 1. initial coordinates - an (x,y) point where the object is located on the screen
