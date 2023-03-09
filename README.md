@@ -206,8 +206,8 @@ simple display the object on the screen.
 ___Examples___
 The commands below are use-cases from **Setup** utility.
 
-`/splash --message="Clue OS" --xpoint=-2021 -y5 --head`
-> Displays "Clue OS" text message on the top-right corner of the
+`splash --message="Linux OS" --xpoint=-2021 -y5 --head`
+> Displays "Linux OS" text message on the top-right corner of the
 screen (relative coordinates). This message will not be removed by the next command and will not be stored in memory.
 
 `splash --message="System Setup" -x5 -y5 --keep`
@@ -218,7 +218,7 @@ keeps it on the screen and in the system memory even if the next command is for 
 > Deletes "System Setup" text message located at point (5,5) - if it was
 written there before using or not using display options (meaning using `--head` or `--keep` options).
 
-`/opt/clue/bin/splash --image=splash --console --reset`
+`splash --image=splash --console --reset`
 > Displays splash.png image (located in resources repository of the application) creating previously a new console and reset it
 by whatever data filled in.
 
@@ -239,8 +239,8 @@ no values are are specified to these options, relative values will be considered
 
 ___Examples___
 
-`/opt/clue/bin/splash --image=splash`
+`splash --image=splash`
 > Displays splash.png image in the middle of the screen.
 
-`/splash --message="Clue" --xpoint=-12 -y5 --`
-> Displays "Clue" text message to the point (width/2, 5)
+`splash --message="Linux" --xpoint=-12 -y5 --`
+> Displays "Linux" text message to the point (width/2, 5)
