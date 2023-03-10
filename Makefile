@@ -1,6 +1,6 @@
 CC?=gcc
 CFLAGS?=-O2
-LDFLAGS?=-O2 -w
+LDFLAGS?=-O2 -w -static
 LIBS?=libfreetype.a libjpeg.a libpng16.a libz.a
 
 CFLAGS += -I. -I./include -I/usr/include -I/usr/include/freetype2 -I/usr/include/freetype2/freetype
