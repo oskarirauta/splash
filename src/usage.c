@@ -243,7 +243,6 @@ void usageSystem(char *fn) {
 
 void usageAll(char *fn) {
 
-	usageTitle();
 	usageCommon(fn);
 	usageImages(fn);
 	usageMessages(fn);
@@ -261,7 +260,6 @@ void usage(char *fn, bool images, bool messages, bool shapes, bool display, bool
 		return;
 	}
 
-	usageTitle();
 	usageCommon(fn);
 
 	if ( images )
