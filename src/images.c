@@ -62,7 +62,16 @@ CmdData SetImageProps(CmdData data)
 			}
 
 			//check if the image has supported extention (PNG)
-			if(!endsWith(data.value, ".png") && !endsWith(data.value, ".jpg") && !endsWith(data.value, ".bmp")) strcat(data.value, ".png");
+			#if(defined WITH_JPEG && defined WITH_BMP)
+			if(!endsWith(data.value, ".png") && !endsWith(data.value, ".jpg") && !endsWith(data.value, ".bmp"))
+			#elif(defined WITH_JPEG)
+			if(!endsWith(data.value, ".png") && !endsWith(data.value, ".jpg"))
+			#elif(defined WITH_BMP)
+			if(!endsWith(data.value, ".png") && !endsWith(data.value, ".bmp"))
+			#else
+			if(!endsWith(data.value, ".png"))
+			#endif
+				strcat(data.value, ".png");
 		}
 	}
 	
@@ -124,15 +133,23 @@ void OverdrawImage(CmdData data)
 int GetImageSize(char *imgfile, int *x, int *y)
 {
 	if(isPngImage(imgfile)) return GetPngImageSize(imgfile, x, y);
+#ifdef WITH_JPEG
 	else if(isJpgImage(imgfile)) return GetJpgImageSize(imgfile, x, y);
+#endif
+#ifdef WITH_BMP
 	else if(isBmpImage(imgfile)) return GetBmpImageSize(imgfile, x, y);
+#endif
 }
 
 int GetImageBuffer(char *imgfile, unsigned char *buffer, unsigned char **alpha, int x,int y)
 {
 	if(isPngImage(imgfile)) return GetPngImageBuffer(imgfile, buffer, alpha, x, y);
+#ifdef WITH_JPEG
 	else if(isJpgImage(imgfile)) return GetJpgImageBuffer(imgfile, buffer, alpha, x, y);
+#endif
+#ifdef WITH_BMP
 	else if(isBmpImage(imgfile)) return GetBmpImageBuffer(imgfile, buffer, alpha, x, y);
+#endif
 }
 
 void __drawImage(char *imgfile, int x_offs, int y_offs, int rotate, bool stretch, bool enlarge, bool cleanup)

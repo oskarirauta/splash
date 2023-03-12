@@ -61,17 +61,21 @@ int GetPngImageSize(char *imgfile, int *x, int *y);
 
 int GetPngImageBuffer(char *imgfile, unsigned char *buffer, unsigned char ** alpha, int x, int y);
 
+#ifdef WITH_BMP
 bool isBmpImage(char *imgfile);
 
 int GetBmpImageSize(char *imgfile, int *x, int *y);
 
 int GetBmpImageBuffer(char *imgfile, unsigned char *buffer, unsigned char **alpha, int x, int y);
+#endif
 
+#ifdef WITH_JPEG
 bool isJpgImage(char *imgfile);
 
 int GetJpgImageSize(char *imgfile, int *x, int *y);
 
 int GetJpgImageBuffer(char *imgfile, unsigned char *buffer, unsigned char ** alpha, int x, int y);
+#endif
 
 void doRotate(struct ImageInfo *i, int rot);
 
@@ -79,7 +83,9 @@ void doFitToScreen(struct ImageInfo *i, int screen_width, int screen_height, int
 
 void doEnlarge(struct ImageInfo *i, int screen_width, int screen_height, int ignoreaspect);
 
+#ifdef WITH_BMP
 void FetchPallete(int fd, struct BmpColor pallete[], int count);
+#endif
 
 void __drawImage(char *imgfile, int x_offs, int y_offs, int rotate, bool stretch, bool enlarge, bool cleanup);
 
