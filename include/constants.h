@@ -1,7 +1,7 @@
 #ifndef __CONSTANTS_H__
 #define __CONSTANTS_H__
 
-#define VERSION "1.4.2"
+#define VERSION "1.4.3"
 
 #ifndef DATADIR
 #define DATADIR "/usr/share/splash"
