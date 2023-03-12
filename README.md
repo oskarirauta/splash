@@ -5,6 +5,21 @@
 for Openwrt, as it's great - but could have even a option for some eye candy, for those who don't
 run it **headless**.
 
+# Some changes in this fork
+ - code was pretty old, modern compiler had some problems with it; fixed that.
+ - added runtime documentation (--help, usage instructions)
+ - simplified projects directory structure
+ - new Makefile
+ - as there is no configure script; I added necessary variables as optionals to Makefile allowing overriding.
+ - bmp format is pretty old and rarely used. I made it optional and disabled as default.
+ - jpg format can be considered rare these days as well, almost always, png is used, so it's optional and disabled as default as well.
+ - removed references to **Clue OS** - splash no longer is os exclusive. Just referenced to *Linux* if necessary.
+
+# Future plans
+ - re-write?
+
+# Description
+
 **Splash** can display graphics (JPG image format and others) or some combinations of graphics with
 text messages (in graphical format). Splash program uses a stateful memory buffer and is able to
 initiate and maintain the workflow even is the process is not running in loop.
