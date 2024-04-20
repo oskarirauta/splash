@@ -198,7 +198,7 @@ void usageDisplay(char *fn) {
 	printf("various display options from the list below can be combined to obtain a different experience.\r\n");
 
 	printf("\nAvailable options are:\r\n");
-	printf(" - device - uses argument as framebuffer device, for example --device=/dev/fb1\r\n");
+	printf(" - dev - uses argument as framebuffer device, for example --dev=/dev/fb1\r\n");
 	printf(" - reset - resets/clears the entire screen area (delete all drawn objects) and make the screen black\r\n");
 	printf(" - console - creates a graphical terminal over frame buffer (a canvas area able to render graphical objects). In \r\n");
 	printf("   case this option is not specified the command will use the existent graphical console.\r\n");
