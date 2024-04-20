@@ -22,11 +22,18 @@ static struct fb_cmap ocmap = {0, 256, ored, ogreen, oblue};
  * Open frame buffer console/device and initializing pointers and structures
  * for graphical manipulation
  */
-void OpenBuffer(void)
+void OpenBuffer(char *fb_dev)
 {
 	unsigned long page_mask;
 
-	if(getenv("FRAMEBUFFER"))
+	if ( fb_dev != NULL )
+	{
+		if (!(fbs.fbf = fopen(fb_dev, "w+")))
+		{
+			ERROR("Cannot open FrameBuffer device: %s", fb_dev);
+			exit(1);
+		}
+	} else if(getenv("FRAMEBUFFER"))
 	{
 		if (!(fbs.fbf = fopen(getenv("FRAMEBUFFER"), "w+")))
 		{

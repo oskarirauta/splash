@@ -22,6 +22,8 @@
 #include "shapes.h"
 #include "text.h"
 
+static char FBPATH[256];
+
 void SaveDataInMemory(CmdData data)
 {
 	int ShmID;
@@ -137,7 +139,7 @@ bool HasDataInMemory(void)
  *
  * @return CmdData structure
  */
-CmdData GetInputData(int argc, /*char argv[]*/char *argv)
+CmdData GetInputData(int argc, char **argv)
 {
 	CmdData data;
 	char value[1000];
@@ -146,6 +148,7 @@ CmdData GetInputData(int argc, /*char argv[]*/char *argv)
 	//Command line arguments
 	static struct option options[] =
 	{
+		{"dev", required_argument, NULL, 'd'},
 		{"reset", no_argument, NULL, 'r'},
 		{"keep", no_argument, NULL, 'k'},
 		{"wipe", no_argument, NULL, 'w'},
@@ -169,7 +172,7 @@ CmdData GetInputData(int argc, /*char argv[]*/char *argv)
 	strcpy(data.value, "");
 	strcpy(data.props, "");
 
-	while((opt = getopt_long(argc, argv, "rkwhen::q::x::y::i:m:p:s", options, NULL)) != -1)
+	while((opt = getopt_long(argc, argv, "rkwhen::q::x::y::i:m:p:sd:", options, NULL)) != -1)
 	{
 		if (optarg != NULL)
 		{
@@ -182,6 +185,14 @@ CmdData GetInputData(int argc, /*char argv[]*/char *argv)
 		
 		switch (opt)
 		{
+			case 'd':
+				if (strlen(value) < 1 )
+					ERROR("-d/--dev requires framebuffer device such as /dev/fb0 as argument");
+				else if ( strlen(value) > 253 )
+					ERROR("framebuffer device passed to -d, had too long path to be acceptable framebuffer device");
+				else
+					strcpy(FBPATH, value);
+				break;
 			case 'p':
 				if(strlen(data.props) > 0) strcat(data.props, ", ");
 				strcat(data.props, value);
@@ -307,6 +318,7 @@ int main(int argc, char **argv)
 	setlocale(LC_ALL, "");
 	strcpy(RESPATH, DATADIR);
 	strcpy(LOGFILE, LOGFILEPATH);
+	strcpy(FBPATH, "");
 
 	if ( parseUsage(argc, argv))
 		return 0;
@@ -338,7 +350,7 @@ int main(int argc, char **argv)
 		}
 			
 		//initialize the screen
-		OpenBuffer();
+		OpenBuffer(strlen(FBPATH) > 0 ? FBPATH : NULL);
 
 		//reset the screen
 		if(getBoolDataProperty(data, "reset") || getBoolDataProperty(data, "console"))
@@ -352,8 +364,8 @@ int main(int argc, char **argv)
 		INFO("New process OPENs console");
 
 		//initialize the screen
-		OpenBuffer();
-		
+		OpenBuffer(strlen(FBPATH) > 0 ? FBPATH : NULL);
+
 		//reset the screen
 		if(getBoolDataProperty(data, "reset"))
 		{

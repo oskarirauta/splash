@@ -21,7 +21,7 @@
  * Open frame buffer console/device and initializing pointers and structures
  * for graphical manipulation
  */
-void OpenBuffer(void);
+void OpenBuffer(char *s);
 
 /**
  * Close frame buffer console/device and dropping all the pointers and structures
