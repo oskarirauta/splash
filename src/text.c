@@ -14,6 +14,7 @@
 #include "text.h"
 #include "buffer.h"
 
+int __drawPixel(int x, int y, int32_t rgba);
 
 CmdData SetTextProps(CmdData data)
 {
@@ -268,8 +269,8 @@ void __drawText(char *text, int xc, int yc, char *fontfile, int size, int32_t rg
 						{
 							if (x + xc >= 0 && y + yc - (metrics->horiBearingY / 64) >= 0)
 							{
-								long int location = (x + xc + fbs.vinfo.xoffset) * (fbs.vinfo.bits_per_pixel / 8) + (y + yc - (metrics->horiBearingY / 64) + fbs.vinfo.yoffset) * fbs.finfo.line_length;
-								SetColor(location, rgba);								
+
+								__drawPixel(x + xc, y + yc - (metrics->horiBearingY / 64), rgba);
 							}
 						}
 					}
