@@ -66,7 +66,7 @@ objs/splash.o: src/splash.c
 	$(CC) $(CFLAGS) -c -o $@ $<;
 
 splash: $(OBJS)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(EXTRA_LDFLAGS) $(OBJS) $(LIBS) $(EXTRALIBS) -o $@;
+	$(CC) $(CFLAGS) $(LDFLAGS) $(EXTRA_LDFLAGS) $(OBJS) $(LIBS) $(EXTRA_LIBS) -o $@;
 
 clean:
 	rm -f $(OBJS) splash
